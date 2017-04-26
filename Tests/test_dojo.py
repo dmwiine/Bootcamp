@@ -81,6 +81,21 @@ class TestDojo(unittest.TestCase):
     def test_print_room_prints_all_the_names_as_expected(self):
         pass
 
+    def test_reallocate_person_successfully_reallocates_person(self):
+        self.dojo.create_room("living_space", ["A", "B", "C"])
+        fellow = self.dojo.add_fellow("Daph", 'Y')
+        fellow_room = fellow.living_space.name
+        self.dojo.reallocate_person("Daph", "B")
+        new_fellow_room = fellow.living_space.name
+        self.assertNotEqual(new_fellow_room, fellow_room, msg="Person was not reallocated")
+
+    def test_person_is_removed_from_old_room_occupants_list(self):
+        '''self.dojo.create_room("living_space", ["A", "B"])
+        fellow = self.dojo.add_fellow("Daph", 'Y')
+        livingspace = fellow.living_space
+        self.dojo.reallocate_person("Daph", "B")
+        new_fellow_room = fellow.living_sp
+        self.assertNotEqual(new_fellow_room, fellow_room, msg="Person was not reallocated")'''
         #def test_
         #def test_create_room_takes_list_parameter(self):
         #self.assertRaises(ValueError,self.dojo.create_room, "office","")
