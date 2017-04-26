@@ -23,3 +23,9 @@ class LivingSpace(Room):
         print(self.name)
         print("-----------------------------------------------------")
         print(",".join(occupant.name for occupant in self.occupants))
+
+    def print_allocations_to_file(self):
+        file = open('./Files/allocations.txt', 'w')
+        file.write('\n' + self.name + '\n')
+        file.write("-----------------------------------------------------"'\n')
+        file.write(",".join(occupant.name for occupant in self.occupants)+'\n')
