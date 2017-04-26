@@ -22,4 +22,10 @@ class Office(Room):
     def print_allocations(self):
         print(self.name)
         print("-----------------------------------------------------")
-        print(",".join(occupant.name for occupant in self.occupants))
+        print(",".join(occupant.name for occupant in self.occupants).upper())
+
+    def print_allocations_to_file(self):
+        file = open('./Files/allocations.txt', 'w')
+        file.write('\n' + self.name + '\n')
+        file.write("-----------------------------------------------------"'\n')
+        file.write(",".join(occupant.name for occupant in self.occupants).upper()+'\n')
