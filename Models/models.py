@@ -8,7 +8,7 @@ engine = create_engine('sqlite:///dojo.db', echo=True)
 Base = declarative_base()
 
 
-class Fellow(Base):
+class FellowModel(Base):
     """"""
     __tablename__ = "fellow"
 
@@ -17,34 +17,33 @@ class Fellow(Base):
     office_id = Column('office_id', Integer, ForeignKey("office.office_id"), nullable=True)
     name = Column(String)
 
-    fellow_living_space = relationship("living_space", foreign_keys=[living_space_id])
-    fellow_office = relationship("office",foreign_keys=[office_id])
+    fellow_living_space = relationship("LivingSpaceModel", foreign_keys=[living_space_id])
+    fellow_office = relationship("OfficeModel", foreign_keys=[office_id])
     # ----------------------------------------------------------------------
-    def __init__(self, fellow_id, living_space_id, office_id, name):
+
+    def __init__(self, living_space_id, office_id, name):
         """"""
-        self.fellow_id = fellow_id
         self.living_space_id = living_space_id
         self.office_id = office_id
         self.name = name
 
 
-class LivingSpace(Base):
+class LivingSpaceModel(Base):
     """"""
     __tablename__ = "living_space"
-
     living_space_id = Column(Integer, primary_key=True)
     name = Column(String)
     spaces_available = Column(Integer)
 
+
     # ----------------------------------------------------------------------
-    def __init__(self, living_space_id, name, spaces_available):
+    def __init__(self, name, spaces_available):
         """"""
-        self.living_space_id = living_space_id
         self.name = name
         self.spaces_available = spaces_available
 
 
-class Office(Base):
+class OfficeModel(Base):
     """"""
     __tablename__ = "office"
 
@@ -52,17 +51,17 @@ class Office(Base):
     name = Column(String)
     spaces_available = Column(Integer)
 
+
     # ----------------------------------------------------------------------
-    def __init__(self, office_id, name, spaces_available):
+    def __init__(self, name, spaces_available):
         """"""
-        self.office_id = office_id
         self.name = name
         self.spaces_available = spaces_available
 
 
 
 
-class Staff(Base):
+class StaffModel(Base):
     """"""
     __tablename__ = "staff"
 
@@ -70,11 +69,10 @@ class Staff(Base):
     office_id = Column('office_id', Integer, ForeignKey("office.office_id"), nullable=True)
     name = Column(String)
 
-    staff_office = relationship("office", foreign_keys=[office_id])
+    staff_office = relationship("OfficeModel", foreign_keys=[office_id])
     # ----------------------------------------------------------------------
-    def __init__(self, staff_id, office_id, name):
+    def __init__(self, office_id, name):
         """"""
-        self.staff_id = staff_id
         self.office_id = office_id
         self.name = name
 
