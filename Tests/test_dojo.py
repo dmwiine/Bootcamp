@@ -1,6 +1,7 @@
 import unittest
 from app.dojo import Dojo
 
+
 class TestDojo(unittest.TestCase):
     def setUp(self):
         self.dojo = Dojo()
@@ -9,14 +10,13 @@ class TestDojo(unittest.TestCase):
 
         initial_office_count = len(self.dojo.all_offices)
         self.dojo.create_room("office",["Blue"])
-        #self.assertTrue(blue_office)
+
         new_office_count = len(self.dojo.all_offices)
         self.assertEqual(new_office_count - initial_office_count, len(["Blue"]))
 
     def test_creates_living_space_successfully(self):
         initial_living_space_count = len(self.dojo.all_living_spaces)
         self.dojo.create_room("living_space",["Blue"])
-        #self.assertTrue(red_living_space)
         new_room_count = len(self.dojo.all_living_spaces)
         self.assertEqual(new_room_count - initial_living_space_count, 1)
 
@@ -90,14 +90,5 @@ class TestDojo(unittest.TestCase):
         self.assertNotEqual(new_fellow_room, fellow_room, msg="Person was not reallocated")
 
     def test_person_is_removed_from_old_room_occupants_list(self):
-        '''self.dojo.create_room("living_space", ["A", "B"])
-        fellow = self.dojo.add_fellow("Daph", 'Y')
-        livingspace = fellow.living_space
-        self.dojo.reallocate_person("Daph", "B")
-        new_fellow_room = fellow.living_sp
-        self.assertNotEqual(new_fellow_room, fellow_room, msg="Person was not reallocated")'''
-        #def test_
-        #def test_create_room_takes_list_parameter(self):
-        #self.assertRaises(ValueError,self.dojo.create_room, "office","")
-
+        pass
 
