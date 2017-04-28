@@ -63,7 +63,6 @@ class TheDojo (cmd.Cmd):
     prompt = '(dojo_main) '
     file = None
 
-
     @docopt_cmd
     def do_create_room(self, arg):
         """Usage: create_room <room_type> <room_name>..."""
@@ -71,7 +70,10 @@ class TheDojo (cmd.Cmd):
         room_type = arg["<room_type>"]
         room_names = arg["<room_name>"]
         dojo.create_room(room_type.lower(),room_names)
-        print("********************** Room successfully created ************************")
+        if len(room_names) > 0:
+            print("********************** Rooms successfully created ************************")
+        else:
+            print("********************** Room successfully created ************************")
 
     @docopt_cmd
     def do_add_person(self, arg):
@@ -88,7 +90,6 @@ class TheDojo (cmd.Cmd):
 
         if staff is None:
             dojo.add_staff(person_name)
-        print(arg)
         print(person_name + " successfully created.")
 
     @docopt_cmd
@@ -117,7 +118,6 @@ class TheDojo (cmd.Cmd):
         else:
             dojo.print_unallocated()
 
-
     @docopt_cmd
     def do_reallocate_person(self, arg):
         """Usage: reallocate_person <first_name> <last_name> <new_room_name>"""
@@ -126,7 +126,6 @@ class TheDojo (cmd.Cmd):
         person_name = first_name + " " + last_name
         new_room_name = arg['<new_room_name>']
         dojo.reallocate_person(person_name,new_room_name)
-        print(arg)
 
     @docopt_cmd
     def do_load_people(self, arg):
