@@ -12,20 +12,25 @@ class LivingSpace(Room):
         else:
             return True
 
-    def add_person(self,fellow):
-        fellow.living_space = self
-        if self.space_available != 0:
+    def add_person(self, fellow):
+        if self.space_available > 0:
+            fellow.living_space = self
             self.space_available -= 1
             self.occupants.append(fellow)
         return fellow
 
     def print_allocations(self):
-        print(self.name)
-        print("-----------------------------------------------------")
-        print(",".join(occupant.name for occupant in self.occupants))
+        if len(self.occupants) > 0:
+            print(self.name)
+            print("-----------------------------------------------------")
+            print(",".join(occupant.name for occupant in self.occupants).upper())
+        else:
+            print(self.name)
+            print("-----------------------------------------------------")
+            print("Room is empty")
 
     def print_allocations_to_file(self):
         file = open('./Files/allocations.txt', 'w')
         file.write('\n' + self.name + '\n')
         file.write("-----------------------------------------------------"'\n')
-        file.write(",".join(occupant.name for occupant in self.occupants)+'\n')
+        file.write(",".join(occupant.name for occupant in self.occupants).upper()+'\n')
