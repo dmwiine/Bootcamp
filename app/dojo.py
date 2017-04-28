@@ -290,12 +290,23 @@ class Dojo():
 
         for fellow in session.query(FellowModel).order_by(FellowModel.fellow_id):
             new_fellow = Fellow(fellow.name)
-            #fellow_space = LivingSpace(fellow.living_space.name)
-            #fellow_space = fellow.living_space.spaces_available
-            #new_fellow.living_space = fellow_space
+            if fellow.living_space:
+                fellow_space = LivingSpace(fellow.living_space.name)
+                fellow_space.space_available = fellow.living_space.spaces_available
+                new_fellow.living_space = fellow_space
+
+            if fellow.office:
+                office = Office(fellow.office.name)
+                office.space_available = fellow.office.spaces_available
+                new_fellow.office = office
+
             self.all_fellows.append(new_fellow)
 
         for staff in session.query(StaffModel).order_by(StaffModel.staff_id):
             new_staff = Staff(staff.name)
+            if staff.office:
+                office = Office(staff.office.name)
+                office.space_available = staff.office.spaces_available
+                new_staff.office = office
             self.all_staff.append(new_staff)
 
