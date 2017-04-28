@@ -13,16 +13,22 @@ class Office(Room):
             return True
 
     def add_person(self, person):
-        person.office = self
-        if self.space_available != 0:
+        if self.space_available > 0:
+            person.office = self
             self.space_available -= 1
             self.occupants.append(person)
         return person
 
     def print_allocations(self):
-        print(self.name)
-        print("-----------------------------------------------------")
-        print(",".join(occupant.name for occupant in self.occupants).upper())
+        if len(self.occupants) > 0:
+            print(self.name)
+            print("-----------------------------------------------------")
+            print(",".join(occupant.name for occupant in self.occupants).upper())
+            print()
+        else:
+            print(self.name)
+            print("-----------------------------------------------------")
+            print("Room is empty")
 
     def print_allocations_to_file(self):
         file = open('./Files/allocations.txt', 'w')
